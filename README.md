@@ -19,3 +19,16 @@ ggplot2 (v3.3.5)\
 gridExtra (v2.3)\
 DESeq2 (v1.30.0)\
 stringr (v1.4.0)
+## 3, Other bioinformatics utilities
+STAR (v2.7.9a)\
+fastp (v0.22.0)\
+histat2 (v2.1.0)\
+picard (v2.23.8)\
+samtools (v1.9)\
+macs2 (v2.2.7.1)\
+homer (v4.11.1)\
+bedtools (v2.29.2)\
+deeptools (v3.5.0)\
+htseq (v0.13.5)\
+featureCount (v2.0.6)\
+fetchChromSizes, bedGraphToBigWig from UCSC utilities
