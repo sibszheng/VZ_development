@@ -1,7 +1,7 @@
-# Softwares/Packages prerequisite:
-## 1, General programs
+## Softwares/Packages prerequisite:
+### 1, General programs
 R v4.0.3
-## 2, R packages
+### 2, R packages
 Seurat(v4.0.4)\
 DoubletFinder(v2.0.3)\
 tidyverse (v1.3.1)\
@@ -19,7 +19,7 @@ ggplot2 (v3.3.5)\
 gridExtra (v2.3)\
 DESeq2 (v1.30.0)\
 stringr (v1.4.0)
-## 3, Other bioinformatics utilities
+### 3, Other bioinformatics utilities
 STAR (v2.7.9a)\
 fastp (v0.22.0)\
 histat2 (v2.1.0)\
