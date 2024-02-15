@@ -1,4 +1,6 @@
 # Unraveling Lineage Roadmaps and Cell Fate Determinants to Postnatal Neural Stem Cells and Ependymal cells in the Developing Ventricular Zone
+## Raw sequencing data
+The raw data (fastq files) are deposited into ArrayExpress under the accession number
 ## Softwares/Packages prerequisite
 ### 1, General programs
 R v4.0.3
