@@ -33,3 +33,5 @@ deeptools (v3.5.0)\
 htseq (v0.13.5)\
 featureCount (v2.0.6)\
 fetchChromSizes, bedGraphToBigWig from UCSC utilities
+## Contact
+zhengjianqun@ojlab.ac.cn
