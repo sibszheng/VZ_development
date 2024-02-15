@@ -37,5 +37,7 @@ deeptools (v3.5.0)\
 htseq (v0.13.5)\
 featureCount (v2.0.6)\
 fetchChromSizes, bedGraphToBigWig from UCSC utilities
+## Reproducing the results from the paper
+In Scripts folder, pipelines of scRNA-seq_10X, scRNA-seq_Plate, bulk_RNA-seq and ChIP-seq are provided to perform data processing starting from fastq files. Then the resulting R objects, together with the provided reference gene sets, are subject to Plot_pipeline to yield the graphs present in Figures or Supplementary figures of the paper. 
 ## Contact
 zhengjianqun@ojlab.ac.cn
