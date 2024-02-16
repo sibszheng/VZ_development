@@ -1,10 +1,14 @@
 #t-SNE plot(Fig.1B, Fig.S1C, Fig.2E)
 library(monocle)
 library(ggplot2)
-plot_cell_clusters(cds_10X,color_by="Cluster",cell_size=0.6)+ 
-  scale_color_manual(values=palette(c("#A9E0FF","#5F72E2","#967AE1","#E6A0EA","#B83332","#B3B2BA","#FDC471","#DEF3A0","#A8E9B5","#98F7E4")))
+plot_cell_clusters(cds_10X,color_by="Cluster",cell_size=0.6)+
+  scale_color_manual(values=palette(c("#A9E0FF","#5F72E2","#967AE1",
+                                      "#E6A0EA","#B83332","#B3B2BA",
+                                      "#FDC471","#DEF3A0","#A8E9B5","#98F7E4")))
 plot_cell_clusters(cds_Plate,color_by="Cluster")+ 
-  scale_color_manual(values=palette(c("#A9E0FF","#5F72E2","#967AE1","#E6A0EA","#B83332","#B3B2BA","#FDC471","#DEF3A0","#A8E9B5","#98F7E4")))
+  scale_color_manual(values=palette(c("#A9E0FF","#5F72E2","#967AE1",
+                                      "#E6A0EA","#B83332","#B3B2BA",
+                                      "#FDC471","#DEF3A0","#A8E9B5","#98F7E4")))
 plot_cell_clusters(cds_10X,markers="Cspg4",cell_size=0.6)+               
   facet_wrap(~Cluster, nrow = 3)#using Cspg4 gene as an example
 
@@ -14,7 +18,9 @@ library(ggplot2)
 plot_cell_trajectory(cds_10X, cell_size=1.0)
 plot_cell_trajectory(cds_Plate)
 plot_cell_trajectory(cds_10X,color_by="Cluster",cell_size=1.0)+
-  scale_color_manual(values=palette(c("#A9E0FF","#5F72E2","#967AE1","#E6A0EA","#B83332","#B3B2BA","#FDC471","#DEF3A0","#A8E9B5","#98F7E4")))
+  scale_color_manual(values=palette(c("#A9E0FF","#5F72E2","#967AE1",
+                                      "#E6A0EA","#B83332","#B3B2BA",
+                                      "#FDC471","#DEF3A0","#A8E9B5","#98F7E4")))
 plot_cell_trajectory(cds_10X,markers="Gfap",color_by=NULL,cell_size=1.0,use_color_gradient=TRUE) #using Gfap gene as an example
 
 #Trajectory plot(Fig.S1D)
