@@ -1,0 +1,60 @@
+#There are two replicates: TFEB_ChIP_rep1 and TFEB_ChIP_rep2. Here TFEB_ChIP_rep1 is used as an example.
+#1 Quality control
+fastp -i TFEB_ChIP_rep1_R1.fastq.gz \
+         -I TFEB_ChIP_rep1_R2.fastq.gz \
+         -o TFEB_ChIP_rep1_R1.fastp.fastq.gz \
+         -O TFEB_ChIP_rep1_R2.fastp.fastq.gz \
+         -w 8 -l 25
+
+#2 Genome mapping
+hisat2 -p 6 \
+          -mm10_index \
+          --no-temp-splicesite \
+          --no-spliced-alignment \
+          --summary-file TFEB_ChIP_rep1_mapping_stats.txt \
+          -1 TFEB_ChIP_rep1_R1.fastp.fastq.gz \
+          -2 TFEB_ChIP_rep1_R2.fastp.fastq.gz | \
+         samtools view -@ 6 -ShuF 4 -q 30 - | \
+         samtools sort TFEB_ChIP_rep1_tmp -o TFEB_ChIP_rep1_sorted.bam
+samtools index TFEB_ChIP_rep1_sorted.bam
+
+#3 Duplicate removal (picard)
+java -jar -Xmx8g picard.jar MarkDuplicates \
+       INPUT= TFEB_ChIP_rep1_sorted.bam \
+       OUPUT= TFEB_ChIP_rep1_sorted_picardMD.bam \
+       REMOVE_DUPLICATES=true \
+       METRICS_FILE= TFEB_ChIP_rep1_sorted_picardMD.met
+samtools index TFEB_ChIP_rep1_sorted_picardMD.bam
+
+#4 Peak calling
+macs2 callpeak -c TFEB_Input_rep1_sorted_picardMD.bam \
+               -t TFEB_ChIP_rep1_sorted_picardMD.bam \
+               -f BAMPE -g mm \
+               -q 0.01 -B --SPMR \
+               -n TFEB_ChIP_rep1
+
+#5 Identification of overlapping peaks
+#Overlapping peaks were defined as the two peaks from the two replicates with at least 1 bp overlap. Only overlapping peaks were subject to motif enrichment analysis and heatmap depiction.
+bedtools intersect -a TFEB_ChIP_rep1_peaks.narrowPeak \ 
+                             -b TFEB_ChIP_rep2_peaks.narrowPeak \
+                             -wo | cut -f 1-3 | sort | uniq > TFEB_ChIP_intersect.narrowpeak
+
+#6 Motif enrichment analysis (homer)
+findMotifsGenome.pl TFEB_ChIP_intersect.narrowpeak \
+mm10 -size 200 -mask \
+TFEB_ChIP_motif
+
+#7 Heatmap depiction (deeptools)
+bamCoverage --binSize 10 --extendReads --normalizeUsing RPKM \
+-b TFEB_ChIP_rep1_sorted_picardMD.bam \
+-o TFEB_ChIP_rep1_sorted_coverage.bw
+computeMatrix reference-point -p 10 -b 3000 -a 3000 \
+--referencePoint center \
+-R TFEB_ChIP_intersect.narrowpeak \
+-S TFEB_ChIP_rep1_sorted_coverage.bw \
+--binSize 50 --skipZeros \
+-o TFEB_ChIP_rep1_matrix.gz \
+
+#8 Preparation of bigwig files for track visualization
+fetchChromSizes mm10 > mm10.chrom.sizes
+bedGraphToBigWig TFEB_ChIP_reps_treat_pileup.bdg mm10.chrom.sizes
