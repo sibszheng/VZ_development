@@ -2,7 +2,7 @@
 ## Indroduction
 The repository contains the code (in `Scripts` folder) for the data processing and analysis to reproduce the results from the paper titled “Unraveling Lineage Roadmaps and Cell Fate Determinants to Postnatal Neural Stem Cells and Ependymal cells in the Developing Ventricular Zone”(under review). The reference gene sets cited by this paper can be found in `Reference_genesets` folder and the key gene sets identified in this paper are listed in `Output_genesets` folder. 
 ## Raw sequencing data
-The raw data (fastq files) are deposited into ArrayExpress under the accession number
+The raw data (fastq files) are deposited into ArrayExpress under the accession number E-MTAB-13855 (ChIP-seq), E-MTAB-13856 (bulk RNA-seq) and E-MTAB-13858 (scRNA-seq).
 ## Softwares/Packages prerequisite
 ### 1, General programs
 R v4.0.3
